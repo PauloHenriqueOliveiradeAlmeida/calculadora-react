@@ -1,0 +1,44 @@
+.screen {
+  width: 100%;
+  resize: none;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 28px;
+  background-color: #e0e0e0;
+  border: none;
+  scroll-behavior: none;
+}
+.AC {
+  grid-area: AC;
+  background-color: #354dc4 !important;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+.equal {
+  background-color: #f24013 !important;
+  color: white;
+  font-size: 20px;
+}
+.btns {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
+  grid-template-rows: 2fr 2fr 2fr 2fr;
+  grid-template-areas: "AC AC AC AC";
+  gap: 2px;
+}
+.btns button {
+  border-radius: 12px;
+  height: 40px;
+  border: none;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btns button:active {
+  border-radius: 50px;
+}
+.btns button:hover {
+  background-color: #d4d2d2;
+}

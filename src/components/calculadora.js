@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import * as math from "mathjs";
+import "./styles/calculadora.css";
 function Calculadora() {
   const [valor, setValor] = useState("");
   let botoes = [];
   const valores = [
+    "AC",
     9,
     8,
     7,
@@ -11,7 +13,7 @@ function Calculadora() {
     6,
     5,
     4,
-    "X",
+    "*",
     3,
     2,
     1,
@@ -19,15 +21,17 @@ function Calculadora() {
     ",",
     0,
     "-",
-    "=",
-    "AC"
+    "="
   ];
 
   for (let i in valores) {
     botoes.push(
       <button
+        className={
+          valores[i] === "AC" ? "AC" : valores[i] === "=" ? "equal" : "number"
+        }
         onClick={() => {
-          seletor(valores[i]) ? setValor(valor + valores[i]) : setValor(valor);
+          seletor(valores[i]);
         }}
         key={valores[i]}
       >
@@ -37,20 +41,29 @@ function Calculadora() {
   }
 
   function seletor(valorBotao) {
-    if (typeof valorBotao === "string" && isNaN(valor.slice(-1))) {
-      return false;
+    if (valorBotao === "AC") {
+      setValor("");
+    } else if (
+      typeof valorBotao === "string" &&
+      (valor.substr(valor.length - 1, valor.length) === "/" ||
+        valor.substr(valor.length - 1, valor.length) === "*" ||
+        valor.substr(valor.length - 1, valor.length) === "+" ||
+        valor.substr(valor.length - 1, valor.length) === "-" ||
+        valor.substr(valor.length - 1, valor.length) === "=")
+    ) {
+      setValor(valor);
     } else {
+      setValor(valor + valorBotao);
       if (valorBotao === "=") {
-        let soma;
-        console.log(soma);
+        let valorFinal = math.evaluate(valor);
+        setValor(valorFinal);
       }
-      return true;
     }
   }
   return (
     <div>
-      <h1>{valor}</h1>
-      <div>{botoes}</div>
+      <textarea className="screen" defaultValue={valor}></textarea>
+      <div className="btns">{botoes}</div>
     </div>
   );
 }
