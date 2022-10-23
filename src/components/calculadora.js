@@ -56,7 +56,7 @@ function Calculadora() {
       setValor(valor + valorBotao);
       if (valorBotao === "=") {
         let valorFinal = math.evaluate(valor);
-        setValor(valorFinal);
+        setValor(valorFinal.toString());
       }
     }
   }
